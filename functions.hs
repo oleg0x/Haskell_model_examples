@@ -2,7 +2,7 @@ double x = x + x			-- Function definition
 
 quadruple x = double (double x)
 
-factorial n = product [1..n]
+factorial n = product [1 .. n]
 
 twice f x = f (f x)
 
@@ -65,14 +65,14 @@ testA3 ['A', _, _] = True			-- List pattern ('A' and two symbols)
 testA3 _           = False
 
 x = [1, 2, 3]						-- Is just an abbreviation for
-y = 1:(2:(3:[]))					-- operator ':' called 'cons' (construct)
+y = 1 : (2 : (3 : []))				-- operator ':' called 'cons' (construct)
 
 testA :: [Char] -> Bool
-testA ('A':_) = True				-- List pattern ('A' and any symbols)
+testA ('A' : _) = True				-- List pattern ('A' and any symbols)
 testA _       = False
 
 tail' :: [a] -> [a]
-tail' (_:xs) = xs
+tail' (_ : xs) = xs
 
 
 
