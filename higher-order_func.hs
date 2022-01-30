@@ -28,7 +28,7 @@ filter1 pred xs = [x | x <- xs, pred x]
 
 filter2 :: (a -> Bool) -> [a] -> [a]
 filter2 pred [] = []
-filter2 pred (x : xs) | pred x    = x : filter pred xs
+filter2 pred (x : xs) | pred x    = x : filter2 pred xs
                       | otherwise =  filter2 pred xs
 
 
@@ -62,7 +62,7 @@ foldl' func v (x:xs) = foldl' func (func v x) xs
 
 
 prod1 [] = 1
-prod1 (x:xs) = x * product xs
+prod1 (x:xs) = x * prod1 xs
 
 prod2 :: Num a => [a] -> a
 -- prod2 xs = foldr (*) 1 xs		-- With explicit list xs
@@ -72,7 +72,7 @@ prod2 = foldr (*) 1					-- Operators must be parenthesised when used as argument
 
 
 and1 [] = True
-and1 (x:xs) = x && and xs
+and1 (x:xs) = x && and1 xs
 
 and2 :: [Bool] -> Bool
 -- and2 bs = foldr (&&) True bs		-- With explicit list bs
@@ -97,7 +97,7 @@ reverse' = foldl (\xs x -> x:xs) []
 
 -- Composition is used to reduce parentheses and avoid the initial argument.
 
-(.) :: (a -> b) -> (c -> a) -> (c -> b)
+(.) :: (b -> c) -> (a -> b) -> (a -> c)
 f . g = \x -> f (g x)				-- Composition operator
 -- (f . g) x = f (g x)
 
