@@ -21,6 +21,14 @@ length' xs = sum [1 | _ <- xs]
 
 li5 = [x | x <- [1 .. 10], even x]		-- Guard to filter the values
 
+positions :: Eq a => a -> [a] -> [Int]
+positions x xs = [i | (x', i) <- zip xs [0 ..], x == x']
+
+count :: Char -> String -> Int
+count x xs = length [x' | x' <- xs, x == x']
+
+
+
 factors :: Int -> [Int]
 factors n = [x | x <- [1 .. n], n `mod` x == 0]
 
@@ -30,8 +38,10 @@ prime n = factors n == [1, n]
 primes :: Int -> [Int]
 primes n = [x | x <- [2 .. n], prime x]
 
-positions :: Eq a => a -> [a] -> [Int]
-positions x xs = [i | (x', i) <- zip xs [0 ..], x == x']
 
-count :: Char -> String -> Int
-count x xs = length [x' | x' <- xs, x == x']
+
+primes' :: [Int]
+primes' = sieve [2..]
+
+sieve :: [Int] -> [Int]
+sieve (p : xs) = p : sieve [x | x <- xs, x `mod` p /= 0]
